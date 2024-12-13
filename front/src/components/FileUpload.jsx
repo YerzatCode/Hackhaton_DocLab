@@ -69,7 +69,7 @@ const FileUpload = ({ thesisId }) => {
         className={`mt-4 w-full px-4 py-2 text-white font-semibold rounded-lg ${
           uploading
             ? "bg-gray-400 cursor-not-allowed"
-            : "bg-blue-500 hover:bg-blue-600"
+            : "bg-primary hover:bg-secondary hover:text-primary"
         }`}>
         {uploading ? "Загружается..." : "Загрузить"}
       </button>

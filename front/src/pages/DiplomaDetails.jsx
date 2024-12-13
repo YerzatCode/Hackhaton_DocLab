@@ -6,10 +6,11 @@ import FileUpload from "../components/FileUpload"
 import RatingForm from "../components/RatingForm"
 import RatingList from "../components/RatingList"
 
-function DiplomaDetails() {
+function DiplomaDetails({ user }) {
   const [thesisData, setThesisData] = useState(null) // Состояние для данных
   const [loading, setLoading] = useState(true) // Состояние загрузки
   const [error, setError] = useState(null) // Состояние ошибок
+
   const params = useParams()
   useEffect(() => {
     // Запрос к API
@@ -20,6 +21,7 @@ function DiplomaDetails() {
       .then((response) => {
         setThesisData(response.data) // Установка данных
         setLoading(false) // Установка завершения загрузки
+        console.log(response.data)
       })
       .catch((err) => {
         console.error("Error fetching data:", err)
@@ -68,7 +70,11 @@ function DiplomaDetails() {
                     </a>
                   </li>
                 ))}
-                <FileUpload thesisId={thesisData?.ID} />
+                {user.id === thesisData?.user_id_id && (
+                  <>
+                    <FileUpload thesisID={thesisData?.ID} />
+                  </>
+                )}{" "}
               </ul>
             </div>
           </div>

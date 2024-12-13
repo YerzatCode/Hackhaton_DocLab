@@ -8,8 +8,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#160A52", // Добавление вашего цвета
-        secondary: "#F4B223",
+        primary: "#54806F", // Добавление вашего цвета
+        secondary: "#ADD8E6",
         customGray: {
           light: "#f7f7f7",
           DEFAULT: "#d6d6d6",
@@ -19,5 +19,5 @@ export default {
     },
   },
   darkMode: "class",
-  plugins: [require("tw-elements-react/dist/plugin.cjs")],
+  // plugins: [require("tw-elements-react/dist/plugin.cjs")],
 }

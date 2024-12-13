@@ -1,23 +1,38 @@
 import { Container } from "@mui/material"
 import axios from "axios"
 import React from "react"
+import { useNavigate } from "react-router-dom"
 import { TEInput, TERipple } from "tw-elements-react"
 
 export default function Login() {
   const [email, setEmail] = React.useState("")
   const [password, setPassword] = React.useState("")
-
+  const [error, setError] = React.useState("")
+  const navigate = useNavigate()
   const Login = async () => {
-    await axios.post(
-      "http://localhost:8080/users/login",
-      {
-        email,
-        password,
-      },
-      {
-        withCredentials: true,
-      }
-    )
+    await axios
+      .post(
+        "http://localhost:8080/users/login",
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log(res)
+        if (res.statusText === "OK") {
+          window.location.href = "http://localhost:5173/"
+        } else {
+          setError("Неправильный логин или пароль")
+        }
+      })
+      .catch((err) => {
+        // console.log(err.response.data.error)
+        setError(err.response.data.error)
+      })
   }
 
   return (
@@ -148,14 +163,7 @@ export default function Login() {
                 </TERipple>
 
                 {/* <!-- Register link --> */}
-                <p className="mb-0 mt-2 pt-1 text-sm font-semibold">
-                  Don't have an account?{" "}
-                  <a
-                    href="#!"
-                    className="text-danger transition duration-150 ease-in-out hover:text-danger-600 focus:text-danger-600 active:text-danger-700">
-                    Register
-                  </a>
-                </p>
+                <p className="mb-0 mt-2 pt-1 text-sm font-semibold">{error}</p>
               </div>
             </form>
           </div>

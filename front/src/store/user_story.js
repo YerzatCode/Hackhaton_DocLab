@@ -24,6 +24,7 @@ const useUserStore = create((set) => ({
     locate: "",
     roles: [],
   },
+  isAuth: false,
   setUser: (user) => set({ user }),
   setRoles: (roles) => set((state) => ({ user: { ...state.user, roles } })),
   addRole: (role) =>
@@ -47,6 +48,7 @@ const useUserStore = create((set) => ({
       const userData = response.data
       set({ user: userData })
       set({ roles: userData.roles })
+      set({ isAuth: true })
     } catch (error) {
       console.error("Ошибка при получении данных пользователя:", error)
     }

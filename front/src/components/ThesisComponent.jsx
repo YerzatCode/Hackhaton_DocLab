@@ -5,7 +5,7 @@ import useThesisStore from "../store/theses_story"
 import useUserStore from "../store/user_story"
 import DateFormatter from "./DateFormatter"
 import "./main.css"
-const ThesisComponent = ({ isUser, thesesID }) => {
+const ThesisComponent = ({ isUser }) => {
   const { theses } = useThesisStore((state) => state)
   const { user } = useUserStore()
   // Состояния для хранения поисковых запросов
@@ -67,7 +67,7 @@ const ThesisComponent = ({ isUser, thesesID }) => {
               </div>
               <button
                 type="submit"
-                class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                class="p-2.5 ms-2 text-sm font-medium text-white bg-primary rounded-lg border border-secondary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <svg
                   class="w-4 h-4"
                   aria-hidden="true"
@@ -142,7 +142,7 @@ const ThesisComponent = ({ isUser, thesesID }) => {
           {isUser && (
             <div className="flex gap-4 overflow-x-scroll">
               {theses?.map((item) => {
-                if (item?.user_id == thesesID) {
+                if (item?.user_id === user?.ID) {
                   return (
                     <Link key={item?.ID} to={`/thesis/${item?.ID}`}>
                       <div className="relative group w-80 max-h-[500px]">

@@ -3,7 +3,7 @@ const IntroSection = () => {
     <section className="intro">
       <div className="intro__container container mx-auto px-4">
         <div className="intro__title text-4xl font-bold text-center mb-6">
-          Be smarter with every search
+        With knowledge comes strength and opportunity
         </div>
         <div className="intro__form">
           <form action="get" className="flex justify-center">
@@ -14,7 +14,7 @@ const IntroSection = () => {
             />
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-r-lg">
+              className="#ADD8E6 text-white px-4 py-2 rounded-r-lg">
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>

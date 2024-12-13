@@ -100,7 +100,7 @@ const CreateThesis = () => {
             Cancel
           </button>
           <button
-            className="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500"
+            className="btn border border-secondary p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-primary"
             type="submit"
             onClick={handleSubmit}
             disabled={isLoading}>

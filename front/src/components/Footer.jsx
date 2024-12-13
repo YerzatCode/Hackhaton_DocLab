@@ -1,6 +1,6 @@
 import { Container } from "@mui/material"
 import React from "react"
-import Logo from "../assets/logo cut.jpg"
+import Logo from "../assets/logo cut.svg"
 import "./footer.css"
 
 function Footer() {

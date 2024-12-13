@@ -133,7 +133,7 @@ function UserPage({ userId }) {
             </div>
           </div>
         </div>
-        <ThesisComponent isUser={true} thesesID={params.id} />
+        <ThesisComponent isUser={true} />
       </section>
     </div>
   )

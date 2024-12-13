@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react"
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
 import Footer from "./components/Footer"
 import Navbar from "./components/Navbar" // Навигационная панель (если нужна)
-import RevealEffect from "./components/StartAnim"
 import CreateUser from "./pages/CreateUser"
 import Dashboard from "./pages/Dashboard"
 import DiplomaDetails from "./pages/DiplomaDetails"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
-import NotFound from "./pages/NotFound"
 import Register from "./pages/Register"
 import Thesis from "./pages/Thesis"
 import Upload from "./pages/Upload"
@@ -17,11 +15,13 @@ import UserPage from "./pages/UserPage"
 import useThesisStore from "./store/theses_story"
 import useUserStore from "./store/user_story"
 import useUsersStore from "./store/users_story"
+import ProtectedRoute from "./utils/ProtectedRouter"
 
 const App = () => {
-  const { fetchUserData } = useUserStore()
+  const { fetchUserData, user, isAuth } = useUserStore()
   const { fetchThesesData } = useThesisStore()
   const { fetchUsers } = useUsersStore()
+  // const route = useNavigate()
 
   const [isLoading, setIsLoading] = useState(true)
 
@@ -36,25 +36,86 @@ const App = () => {
 
     loadThesesData()
   }, [fetchThesesData])
+
   return (
     <>
-      <RevealEffect />
+      {/* <RevealEffect /> */}
       <Router>
         <div className="flex flex-col w-full h-full justify-between">
           <Navbar /> {/* Общая навигационная панель */}
           <div className="h-full w-full">
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/thesis" element={<Thesis />} />
-              <Route path="/thesis/:id" element={<DiplomaDetails />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/upload" element={<Upload />} />
-              <Route path="*" element={<NotFound />} /> {/* 404 Страница */}
-              <Route path="/users/:id" element={<UserPage />} />
-              <Route path="/users" element={<UserList />} />
-              <Route path="/users/create" element={<CreateUser />} />
+              <Route
+                path="/thesis"
+                element={
+                  <ProtectedRoute>
+                    <Thesis />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/thesis/:id"
+                element={
+                  <ProtectedRoute>
+                    <DiplomaDetails />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/upload"
+                element={
+                  <ProtectedRoute>
+                    <Upload />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/users"
+                element={
+                  <ProtectedRoute>
+                    <UserList />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/users/:id"
+                element={
+                  <ProtectedRoute>
+                    <UserPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/create-user"
+                element={
+                  <ProtectedRoute>
+                    <CreateUser />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <ProtectedRoute>
+                    <Register />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/" element={<Home user={isAuth} />} />
+
+              {!isAuth && (
+                <>
+                  <Route path="/login" element={<Login />} />
+                </>
+              )}
             </Routes>
           </div>
           <Footer />
